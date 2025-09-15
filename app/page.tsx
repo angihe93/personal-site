@@ -1,6 +1,6 @@
 'use client'
 import { motion } from 'motion/react'
-import { XIcon } from 'lucide-react'
+import { XIcon, Expand } from 'lucide-react'
 import { Spotlight } from '@/components/ui/spotlight'
 import { Magnetic } from '@/components/ui/magnetic'
 import {
@@ -18,7 +18,9 @@ import {
   BLOG_POSTS,
   EMAIL,
   SOCIAL_LINKS,
+  PHONE,
 } from './data'
+import { useState } from 'react'
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -124,6 +126,7 @@ function MagneticSocialLink({
 }
 
 export default function Personal() {
+  const [showModal, setShowModal] = useState(false)
   return (
     <motion.main
       className="space-y-24"
@@ -137,8 +140,9 @@ export default function Personal() {
       >
         <div className="flex-1">
           <p className="text-zinc-600 dark:text-zinc-400">
-            Focused on creating intuitive and performant web experiences.
-            Bridging the gap between design and development.
+            TODO: write bio
+            {/* Focused on creating intuitive and performant web experiences.
+            Bridging the gap between design and development. */}
           </p>
         </div>
       </motion.section>
@@ -152,7 +156,14 @@ export default function Personal() {
           {PROJECTS.map((project) => (
             <div key={project.name} className="space-y-2">
               <div className="relative rounded-2xl bg-zinc-50/40 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950/40 dark:ring-zinc-800/50">
-                <ProjectVideo src={project.video} />
+                {project.video && <ProjectVideo src={project.video} />}
+                {project.image && (
+                  <img
+                    src={project.image}
+                    alt={`${project.name}`}
+                    className="aspect-video w-full rounded-xl object-contain"
+                  />
+                )}
               </div>
               <div className="px-1">
                 <a
@@ -161,7 +172,7 @@ export default function Personal() {
                   target="_blank"
                 >
                   {project.name}
-                  <span className="absolute bottom-0.5 left-0 block h-[1px] w-full max-w-0 bg-zinc-900 dark:bg-zinc-50 transition-all duration-200 group-hover:max-w-full"></span>
+                  <span className="absolute bottom-0.5 left-0 block h-[1px] w-full max-w-0 bg-zinc-900 transition-all duration-200 group-hover:max-w-full dark:bg-zinc-50"></span>
                 </a>
                 <p className="text-base text-zinc-600 dark:text-zinc-400">
                   {project.description}
@@ -176,8 +187,37 @@ export default function Personal() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <h3 className="mb-5 text-lg font-medium">Work Experience</h3>
-        <div className="flex flex-col space-y-2">
+        <h3 className="mb-5 text-lg font-medium">Resume</h3>
+        <div className="relative">
+          <button className="absolute top-4 right-4 z-10 text-black bg-white rounded-full px-2 py-2 shadow cursor-pointer"
+            onClick={() => setShowModal(true)}>
+            <Expand />
+          </button>
+          <iframe
+            src="/resume/He, Anqi 09-2025.pdf"
+            width="100%"
+            height="400"
+            className="rounded-xl border"
+            title="Resume Preview"
+          />
+        </div>
+        {showModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70">
+            <div className="relative w-screen h-screen bg-white p-4">
+              <button className="absolute top-6 right-6 z-10 text-black bg-white rounded-full px-2 py-2 shadow cursor-pointer"
+                onClick={() => setShowModal(false)}>
+                <XIcon />
+              </button>
+              <iframe
+                src="/resume/He, Anqi 09-2025.pdf"
+                width="100%"
+                height="100%"
+                title="Resume Full View"
+              />
+            </div>
+          </div>
+        )}
+        {/* <div className="flex flex-col space-y-2">
           {WORK_EXPERIENCE.map((job) => (
             <a
               className="relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
@@ -207,14 +247,14 @@ export default function Personal() {
               </div>
             </a>
           ))}
-        </div>
+        </div> */}
       </motion.section>
 
       <motion.section
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <h3 className="mb-3 text-lg font-medium">Blog</h3>
+        <h3 className="mb-3 text-lg font-medium">Blog -- maybe take out</h3>
         <div className="flex flex-col space-y-0">
           <AnimatedBackground
             enableHover
@@ -252,10 +292,11 @@ export default function Personal() {
       >
         <h3 className="mb-5 text-lg font-medium">Connect</h3>
         <p className="mb-5 text-zinc-600 dark:text-zinc-400">
-          Feel free to contact me at{' '}
+          Feel free to get in touch at{' '}
           <a className="underline dark:text-zinc-300" href={`mailto:${EMAIL}`}>
             {EMAIL}
-          </a>
+          </a>{' '}
+          or {PHONE}
         </p>
         <div className="flex items-center justify-start space-x-3">
           {SOCIAL_LINKS.map((link) => (
