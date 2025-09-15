@@ -21,6 +21,7 @@ import {
   PHONE,
 } from './data'
 import { useState } from 'react'
+import React from 'react'
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -127,6 +128,18 @@ function MagneticSocialLink({
 
 export default function Personal() {
   const [showModal, setShowModal] = useState(false)
+
+  // not fully working - Prevent background scroll when modal is open
+  React.useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [showModal]);
   return (
     <motion.main
       className="space-y-24"
@@ -202,8 +215,8 @@ export default function Personal() {
           />
         </div>
         {showModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70">
-            <div className="relative w-screen h-screen bg-white p-4">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
+            <div className="relative w-screen h-screen bg-white dark:bg-zinc-900 p-4">
               <button className="absolute top-6 right-6 z-10 text-black bg-white rounded-full px-2 py-2 shadow cursor-pointer"
                 onClick={() => setShowModal(false)}>
                 <XIcon />
@@ -250,7 +263,7 @@ export default function Personal() {
         </div> */}
       </motion.section>
 
-      <motion.section
+      {/* <motion.section
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
@@ -284,7 +297,7 @@ export default function Personal() {
             ))}
           </AnimatedBackground>
         </div>
-      </motion.section>
+      </motion.section> */}
 
       <motion.section
         variants={VARIANTS_SECTION}
