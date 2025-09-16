@@ -1,4 +1,6 @@
 import { XIcon } from 'lucide-react'
+import { useState } from 'react'
+import { ZoomContext } from './ZoomContext'
 
 type FullPageLayoutProps = {
   onClose: () => void
@@ -9,15 +11,34 @@ export default function FullPageLayout({
   onClose,
   child,
 }: FullPageLayoutProps) {
+  const [zoom, setZoom] = useState(1) // 1 = 100%
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center overflow-auto bg-white">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center overflow-auto bg-white dark:bg-zinc-900">
       <button
         className="absolute top-6 right-6 z-10 cursor-pointer rounded-full bg-white px-2 py-2 text-black shadow"
         onClick={onClose}
       >
         <XIcon />
       </button>
-      {child}
+      <ZoomContext.Provider value={zoom}>{child}</ZoomContext.Provider>
+
+      <div className="fixed bottom-6 z-10 mb-2 flex gap-2">
+        <button
+          className="cursor-pointer rounded-full bg-zinc-400 px-4 py-2 text-black shadow"
+          onClick={() => setZoom((z) => Math.max(0.5, z - 0.1))}
+        >
+          -
+        </button>
+        <span className="cursor-pointer rounded-full bg-zinc-400 px-4 py-2 text-black shadow">
+          {Math.round(zoom * 100)}%
+        </span>
+        <button
+          className="cursor-pointer rounded-full bg-zinc-400 px-4 py-2 text-black shadow"
+          onClick={() => setZoom((z) => Math.min(2, z + 0.1))}
+        >
+          +
+        </button>
+      </div>
     </div>
   )
 }

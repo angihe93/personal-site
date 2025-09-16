@@ -4,6 +4,8 @@ import { useCallback, useId, useState } from 'react'
 import { useResizeObserver } from '@wojtekmaj/react-hooks'
 import { pdfjs, Document, Page } from 'react-pdf'
 import type { PDFDocumentProxy } from 'pdfjs-dist'
+import { useContext } from 'react'
+import { ZoomContext } from './ZoomContext'
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -22,12 +24,13 @@ const maxWidth = 800
 
 type PDFFile = string | File | null
 
-export default function Sample() {
+export default function Resume() {
   const fileId = useId()
   const [file, setFile] = useState<PDFFile>('/resume/He, Anqi 09-2025.pdf')
   const [numPages, setNumPages] = useState<number>()
   const [containerRef, setContainerRef] = useState<HTMLElement | null>(null)
   const [containerWidth, setContainerWidth] = useState<number>()
+  const zoom = useContext(ZoomContext)
 
   const onResize = useCallback<ResizeObserverCallback>((entries) => {
     const [entry] = entries
@@ -58,7 +61,9 @@ export default function Sample() {
               key={`page_${index + 1}`}
               pageNumber={index + 1}
               width={
-                containerWidth ? Math.min(containerWidth, maxWidth) : maxWidth
+                containerWidth
+                  ? Math.min(containerWidth, maxWidth) * zoom
+                  : maxWidth * zoom
               }
               renderTextLayer={false}
               renderAnnotationLayer={false}
