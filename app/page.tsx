@@ -1,7 +1,7 @@
 'use client'
 import { motion } from 'motion/react'
 import { XIcon, Expand } from 'lucide-react'
-import { Spotlight } from '@/components/ui/spotlight'
+import FullPageLayout from './FullPageLayout'
 import { Magnetic } from '@/components/ui/magnetic'
 import {
   MorphingDialog,
@@ -22,6 +22,11 @@ import {
 } from './data'
 import { useState } from 'react'
 import React from 'react'
+import dynamic from 'next/dynamic'
+
+const Resume = dynamic(() => import('./Resume'), {
+  ssr: false,
+})
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -129,17 +134,12 @@ function MagneticSocialLink({
 export default function Personal() {
   const [showModal, setShowModal] = useState(false)
 
-  // not fully working - Prevent background scroll when modal is open
-  React.useEffect(() => {
-    if (showModal) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [showModal]);
+  if (showModal) {
+    return (
+      <FullPageLayout onClose={() => setShowModal(false)} child={<Resume />} />
+    )
+  }
+
   return (
     <motion.main
       className="space-y-24"
@@ -201,35 +201,18 @@ export default function Personal() {
         transition={TRANSITION_SECTION}
       >
         <h3 className="mb-5 text-lg font-medium">Resume</h3>
-        <div className="relative">
-          <button className="absolute top-4 right-4 z-10 text-black bg-white rounded-full px-2 py-2 shadow cursor-pointer"
-            onClick={() => setShowModal(true)}>
+        <div className="relative rounded-xl border">
+          <button
+            className="absolute top-4 right-4 z-10 cursor-pointer rounded-full bg-white px-2 py-2 text-black shadow"
+            onClick={() => setShowModal(true)}
+          >
             <Expand />
           </button>
-          <iframe
-            src="/resume/He, Anqi 09-2025.pdf"
-            width="100%"
-            height="400"
-            className="rounded-xl border"
-            title="Resume Preview"
-          />
-        </div>
-        {showModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
-            <div className="relative w-screen h-screen bg-white dark:bg-zinc-900 p-4">
-              <button className="absolute top-6 right-6 z-10 text-black bg-white rounded-full px-2 py-2 shadow cursor-pointer"
-                onClick={() => setShowModal(false)}>
-                <XIcon />
-              </button>
-              <iframe
-                src="/resume/He, Anqi 09-2025.pdf"
-                width="100%"
-                height="100%"
-                title="Resume Full View"
-              />
-            </div>
+          <div className="h-[400px] overflow-auto">
+            <Resume />
+            <div className="pointer-events-none absolute bottom-0 left-0 h-8 w-full bg-gradient-to-t from-white to-transparent" />
           </div>
-        )}
+        </div>
         {/* <div className="flex flex-col space-y-2">
           {WORK_EXPERIENCE.map((job) => (
             <a
