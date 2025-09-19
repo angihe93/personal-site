@@ -10,7 +10,7 @@ export function Header() {
           Angi
         </Link>
         <div className="text-zinc-600 dark:text-zinc-500">
-          Software Engineer - full-stack, backend, quant
+          Software Engineer - full-stack, quant
         </div>
       </div>
     </header>

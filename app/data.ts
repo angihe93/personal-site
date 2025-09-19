@@ -40,14 +40,22 @@ export const PROJECTS: Project[] = [
     id: 'project1',
   },
   {
-    name: 'Motion Primitives Pro',
+    name: 'GitHub Activity Summarizer',
     description:
-      'Advanced components and templates to craft beautiful websites.',
-    link: 'https://pro.motion-primitives.com/',
-    video:
-      'https://res.cloudinary.com/read-cv/video/upload/t_v_b/v1/1/profileItems/W2azTw5BVbMXfj7F53G92hMVIn32/newProfileItem/d898be8a-7037-4c71-af0c-8997239b050d.mp4?_a=DATAdtAAZAA0',
+      "A tool that helps you gain insights into what a company has been building with real-time GitHub activity data, built with Exa AI's webcrawler",
+    link: 'https://github-activity-summarizer.vercel.app',
+    image: '/projects/github-activity-summarizer.png',
     id: 'project2',
   },
+  // {
+  //   name: 'Motion Primitives Pro',
+  //   description:
+  //     'Advanced components and templates to craft beautiful websites.',
+  //   link: 'https://pro.motion-primitives.com/',
+  //   video:
+  //     'https://res.cloudinary.com/read-cv/video/upload/t_v_b/v1/1/profileItems/W2azTw5BVbMXfj7F53G92hMVIn32/newProfileItem/d898be8a-7037-4c71-af0c-8997239b050d.mp4?_a=DATAdtAAZAA0',
+  //   id: 'project2',
+  // },
   // {
   //   name: 'Motion Primitives',
   //   description: 'UI kit to make beautiful, animated interfaces.',
@@ -118,20 +126,20 @@ export const BLOG_POSTS: BlogPost[] = [
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     label: 'Github',
-    link: 'https://github.com/ibelick',
+    link: 'https://github.com/angihe93',
   },
-  {
-    label: 'Twitter',
-    link: 'https://twitter.com/ibelick',
-  },
+  // {
+  //   label: 'Twitter',
+  //   link: 'https://twitter.com/ibelick',
+  // },
   {
     label: 'LinkedIn',
-    link: 'https://www.linkedin.com/in/ibelick',
+    link: 'https://www.linkedin.com/in/angi-he/',
   },
-  {
-    label: 'Instagram',
-    link: 'https://www.instagram.com/ibelick',
-  },
+  // {
+  //   label: 'Instagram',
+  //   link: 'https://www.instagram.com/ibelick',
+  // },
 ]
 
 export const EMAIL = 'ah3354@columbia.edu'

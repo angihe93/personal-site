@@ -15,7 +15,7 @@ export default function FullPageLayout({
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center overflow-auto bg-white dark:bg-zinc-900">
       <button
-        className="absolute top-6 right-6 z-10 cursor-pointer rounded-full bg-white px-2 py-2 text-black shadow"
+        className="absolute fixed top-4 right-6 z-10 cursor-pointer rounded-full bg-white px-2 py-2 text-black shadow"
         onClick={onClose}
       >
         <XIcon />
@@ -24,16 +24,16 @@ export default function FullPageLayout({
 
       <div className="fixed bottom-6 z-10 mb-2 flex gap-2">
         <button
-          className="cursor-pointer rounded-full bg-zinc-400 px-4 py-2 text-black shadow"
+          className="group relative mt-4 inline-flex shrink-0 items-center gap-[1px] rounded-full bg-zinc-100 px-4 py-2 text-sm text-black transition-colors duration-200 hover:bg-zinc-950 hover:text-zinc-50 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
           onClick={() => setZoom((z) => Math.max(0.5, z - 0.1))}
         >
           -
         </button>
-        <span className="cursor-pointer rounded-full bg-zinc-400 px-4 py-2 text-black shadow">
+        <span className="group relative mt-4 inline-flex shrink-0 items-center gap-[1px] rounded-full bg-zinc-100 px-4 py-2 text-sm text-black transition-colors duration-200 hover:bg-zinc-950 hover:text-zinc-50 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700">
           {Math.round(zoom * 100)}%
         </span>
         <button
-          className="cursor-pointer rounded-full bg-zinc-400 px-4 py-2 text-black shadow"
+          className="group relative mt-4 inline-flex shrink-0 items-center gap-[1px] rounded-full bg-zinc-100 px-4 py-2 text-sm text-black transition-colors duration-200 hover:bg-zinc-950 hover:text-zinc-50 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
           onClick={() => setZoom((z) => Math.min(2, z + 0.1))}
         >
           +

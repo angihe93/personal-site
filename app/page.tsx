@@ -108,6 +108,8 @@ function MagneticSocialLink({
     <Magnetic springOptions={{ bounce: 0 }} intensity={0.3}>
       <a
         href={link}
+        target="_blank"
+        rel="origin"
         className="group relative inline-flex shrink-0 items-center gap-[1px] rounded-full bg-zinc-100 px-2.5 py-1 text-sm text-black transition-colors duration-200 hover:bg-zinc-950 hover:text-zinc-50 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
       >
         {children}
@@ -142,23 +144,23 @@ export default function Personal() {
 
   return (
     <motion.main
-      className="space-y-24"
+      className="space-y-14"
       variants={VARIANTS_CONTAINER}
       initial="hidden"
       animate="visible"
     >
-      <motion.section
+      {/* <motion.section
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
         <div className="flex-1">
           <p className="text-zinc-600 dark:text-zinc-400">
-            TODO: write bio
-            {/* Focused on creating intuitive and performant web experiences.
+            TODO: write bio */}
+      {/* Focused on creating intuitive and performant web experiences.
             Bridging the gap between design and development. */}
-          </p>
+      {/* </p>
         </div>
-      </motion.section>
+      </motion.section> */}
 
       <motion.section
         variants={VARIANTS_SECTION}
@@ -183,6 +185,7 @@ export default function Personal() {
                   className="font-base group relative inline-block font-[450] text-zinc-900 dark:text-zinc-50"
                   href={project.link}
                   target="_blank"
+                  rel="origin"
                 >
                   {project.name}
                   <span className="absolute bottom-0.5 left-0 block h-[1px] w-full max-w-0 bg-zinc-900 transition-all duration-200 group-hover:max-w-full dark:bg-zinc-50"></span>
@@ -213,6 +216,14 @@ export default function Personal() {
             <div className="pointer-events-none absolute bottom-0 left-0 h-8 w-full bg-gradient-to-t from-white to-transparent" />
           </div>
         </div>
+        <a
+          href="/resume/He, Anqi 09-2025.pdf"
+          download
+          // className="inline-flex items-center px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
+          className="group relative mt-4 inline-flex shrink-0 items-center gap-[1px] rounded-full bg-zinc-100 px-3 py-2 text-sm text-black transition-colors duration-200 hover:bg-zinc-950 hover:text-zinc-50 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
+        >
+          Download Resume
+        </a>
         {/* <div className="flex flex-col space-y-2">
           {WORK_EXPERIENCE.map((job) => (
             <a
