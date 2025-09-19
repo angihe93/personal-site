@@ -10,12 +10,12 @@ import {
   MorphingDialogClose,
   MorphingDialogContainer,
 } from '@/components/ui/morphing-dialog'
-import Link from 'next/link'
-import { AnimatedBackground } from '@/components/ui/animated-background'
+// import Link from 'next/link'
+// import { AnimatedBackground } from '@/components/ui/animated-background'
 import {
   PROJECTS,
-  WORK_EXPERIENCE,
-  BLOG_POSTS,
+  // WORK_EXPERIENCE,
+  // BLOG_POSTS,
   EMAIL,
   SOCIAL_LINKS,
   PHONE,

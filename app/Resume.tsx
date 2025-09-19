@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useId, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useResizeObserver } from '@wojtekmaj/react-hooks'
 import { pdfjs, Document, Page } from 'react-pdf'
 import type { PDFDocumentProxy } from 'pdfjs-dist'
@@ -25,8 +25,7 @@ const maxWidth = 800
 type PDFFile = string | File | null
 
 export default function Resume() {
-  const fileId = useId()
-  const [file, setFile] = useState<PDFFile>('/resume/He, Anqi 09-2025.pdf')
+  const file: PDFFile = '/resume/He, Anqi 09-2025.pdf'
   const [numPages, setNumPages] = useState<number>()
   const [containerRef, setContainerRef] = useState<HTMLElement | null>(null)
   const [containerWidth, setContainerWidth] = useState<number>()
